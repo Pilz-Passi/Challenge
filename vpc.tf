@@ -11,7 +11,7 @@ resource "aws_vpc" "devVPC"{
 }
 # Public subnet public CIDR block available in vars.tf and provisionersVPC
 resource "aws_subnet" "devVPC_public_subnet"{
-    cidr_block = "10.0.1.0/28"
+    cidr_block = "10.0.1.0/24"
     vpc_id = aws_vpc.devVPC.id
     map_public_ip_on_launch = true
     availability_zone = data.aws_availability_zones.devVPC_available.names[1]
@@ -20,10 +20,29 @@ resource "aws_subnet" "devVPC_public_subnet"{
     }
 }
 resource "aws_subnet" "private_subnet"{
-    cidr_block = "10.0.2.0/28"
+    cidr_block = "10.0.2.0/24"
     vpc_id = aws_vpc.devVPC.id
     map_public_ip_on_launch = false
     availability_zone = data.aws_availability_zones.devVPC_available.names[1]
+    tags = {
+        Name = "dev_terraform_vpc_private_subnet"
+    }
+}
+# Public subnet public CIDR block available in vars.tf and provisionersVPC
+resource "aws_subnet" "devVPC_public_subnet"{
+    cidr_block = "10.0.3.0/24"
+    vpc_id = aws_vpc.devVPC.id
+    map_public_ip_on_launch = true
+    availability_zone = data.aws_availability_zones.devVPC_available.names[2]
+    tags = {
+        Name = "dev_terraform_vpc_public_subnet"
+    }
+}
+resource "aws_subnet" "private_subnet"{
+    cidr_block = "10.0.4.0/24"
+    vpc_id = aws_vpc.devVPC.id
+    map_public_ip_on_launch = false
+    availability_zone = data.aws_availability_zones.devVPC_available.names[2]
     tags = {
         Name = "dev_terraform_vpc_private_subnet"
     }
