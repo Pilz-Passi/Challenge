@@ -4,15 +4,11 @@ resource "aws_instance" "Wordpress-instance"{
     key_name = "vockey"
     vpc_security_group_ids = [aws_security_group.devVPC_sg_allow_http.id]
     subnet_id = aws_subnet.devVPC_public_subnet1.id
+    user_data = data.template_file.init.rendered
     tags = {
         Name = "Wordpress-instance"
     }
-data "template_file" "init" {
-  template = "${file("${path.module}/init.tpl")}"
-  vars = {
-    consul_address = "${aws_instance.consul.private_ip}"
-  }
-}
+
 #user_data = data.template_file.init.rendered
 /*     #install all neccecary services for worpress
     provisioner "remote-exec"{
@@ -31,5 +27,11 @@ data "template_file" "init" {
     }*/
     provisioner "local-exec"{
     command = "echo Instance Type=${self.instance_type},Instance ID=${self.id},Public DNS=${self.public_dns},AMI ID=${self.ami} >> allinstancedetails"
+  }
+}
+data "template_file" "init" {
+  template = "${file("${path.module}/init.tpl")}"
+  vars = {
+    consul_address = "${aws_instance.consul.private_ip}"
   }
 }
