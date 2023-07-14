@@ -13,6 +13,7 @@ data "template_file" "init" {
     consul_address = "${aws_instance.consul.private_ip}"
   }
 }
+user_data = data.template_file.init.rendered
 /*     #install all neccecary services for worpress
     provisioner "remote-exec"{
         inline = [
