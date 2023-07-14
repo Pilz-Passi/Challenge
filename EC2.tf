@@ -8,24 +8,25 @@ resource "aws_instance" "Wordpress-instance"{
     tags = {
         Name = "Wordpress-instance"
     }
-
-#user_data = data.template_file.init.rendered
-/*     #install all neccecary services for worpress
+}
+/*
+#install all neccecary services for worpress
     provisioner "remote-exec"{
         inline = [
             "sudo yum update -y",
             "sudo yum install -y nginx",
-            "sudo service nginx start"
-            "sudo dnf install -y httpd wget php-fpm php-mysqli php-json php php-devel"
-            "sudo dnf install mariadb105-server"
-            "sudo systemctl start mariadb"
-            "sudo mysql_secure_installation"
-            "wget https://wordpress.org/latest.tar.gz"
+            "sudo service nginx start",
+            "sudo dnf install -y httpd wget php-fpm php-mysqli php-json php php-devel",
+            "sudo dnf install mariadb105-server",
+            "sudo systemctl start mariadb",
+            "sudo mysql_secure_installation",
+            "wget https://wordpress.org/latest.tar.gz",
             "tar -xzf latest.tar.gz"
         ]
         on_failure = continue
-    }*/
+    }
     provisioner "local-exec"{
     command = "echo Instance Type=${self.instance_type},Instance ID=${self.id},Public DNS=${self.public_dns},AMI ID=${self.ami} >> allinstancedetails"
   }
-}
+
+*/
