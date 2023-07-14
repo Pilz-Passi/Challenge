@@ -7,7 +7,13 @@ resource "aws_instance" "Wordpress-instance"{
     tags = {
         Name = "Wordpress-instance"
     }
-    #install all neccecary services for worpress
+data "template_file" "init" {
+  template = "${file("${path.module}/init.tpl")}"
+  vars = {
+    consul_address = "${aws_instance.consul.private_ip}"
+  }
+}
+/*     #install all neccecary services for worpress
     provisioner "remote-exec"{
         inline = [
             "sudo yum update -y",
@@ -21,7 +27,7 @@ resource "aws_instance" "Wordpress-instance"{
             "tar -xzf latest.tar.gz"
         ]
         on_failure = continue
-    }
+    }*/
     provisioner "local-exec"{
     command = "echo Instance Type=${self.instance_type},Instance ID=${self.id},Public DNS=${self.public_dns},AMI ID=${self.ami} >> allinstancedetails"
   }
