@@ -69,7 +69,7 @@ resource "aws_route_table" "devVPC_public_route1"{
     }
 }
 # Provides a resource to create an association between a Public Route Table and a Public Subnet
-resource "aws_route_table_association" "public_subnet_association" {
+resource "aws_route_table_association" "public_subnet_association1" {
     route_table_id = aws_route_table.devVPC_public_route1.id
     subnet_id = aws_subnet.devVPC_public_subnet1.id
     depends_on = [aws_route_table.devVPC_public_route1, aws_subnet.devVPC_public_subnet1]
@@ -86,7 +86,7 @@ resource "aws_route_table" "devVPC_public_route2"{
     }
 }
 # Provides a resource to create an association between a Public Route Table and a Public Subnet
-resource "aws_route_table_association" "public_subnet_association" {
+resource "aws_route_table_association" "public_subnet_association2" {
     route_table_id = aws_route_table.devVPC_public_route2.id
     subnet_id = aws_subnet.devVPC_public_subnet2.id
     depends_on = [aws_route_table.devVPC_public_route2, aws_subnet.devVPC_public_subnet2]

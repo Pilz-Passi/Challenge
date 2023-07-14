@@ -4,11 +4,14 @@ output "vpc_id"{
 output "aws_internet_gateway"{
     value = aws_internet_gateway.devVPC_IGW.id
 }
-output "public_subnet"{
-    value = aws_subnet.devVPC_public_subnet.id 
+output "public_subnet1"{
+    value = aws_subnet.devVPC_public_subnet1.id 
+}    
+output "public_subnet2"{
+    value = aws_subnet.devVPC_public_subnet2.id 
 }
 output "security_group"{
-    value = aws_security_group.devVPC_sg_allow_ssh_http.id
+    value = aws_security_group.devVPC_sg_allow_http.id
 }
 /*output "packer_ami"{
     value= data.aws_ami.packeramisjenkins.id
