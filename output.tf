@@ -14,7 +14,7 @@ output "security_group"{
     value = aws_security_group.devVPC_sg_allow_http.id
 }
 output "ec2_public_ip"{
-    value = aws_instance.webserver.public_ip   
+    value = aws_instance.Wordpress-instance.public_ip   
 }
 /*output "packer_ami"{
     value= data.aws_ami.packeramisjenkins.id
