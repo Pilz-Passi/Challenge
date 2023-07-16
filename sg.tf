@@ -23,7 +23,7 @@ resource "aws_security_group_rule" "devVPC_http8080_ingress_access"{
     type = "ingress"
     cidr_blocks = [var.cidr_blocks]
 }
-# Egress Security all traffic (Outbound)
+# Egress Security all traffic (Outbound), so installations are possible
 resource "aws_security_group_rule" "devVPC_all_traffic_egress_access"{
     from_port = 0
     protocol = "-1"
