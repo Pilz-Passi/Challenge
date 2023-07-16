@@ -2,47 +2,47 @@
 # provides access to the list of AWS availabililty zones which can be accessed by an AWS account specific to region configured in the provider.
 data "aws_availability_zones" "devVPC_available"{}
 resource "aws_vpc" "devVPC"{
-    cidr_block = "10.0.0.0/16"
-    enable_dns_hostnames=true
+    cidr_block = var.cidr_block_dev_vpc
+    enable_dns_hostnames = true
     enable_dns_support = true
     tags = {
         Name = "dev_terraform_vpc"
     }
 }
-# Public subnet public CIDR block available in vars.tf and provisionersVPC
+# Public subnet public CIDR block available in variables.tf and vpc
 resource "aws_subnet" "devVPC_public_subnet1"{
-    cidr_block = "10.0.1.0/24"
+    cidr_block = var.cidr_block_public_subnet1
     vpc_id = aws_vpc.devVPC.id
     map_public_ip_on_launch = true
-    availability_zone = data.aws_availability_zones.devVPC_available.names[1]
+    availability_zone = data.aws_availability_zones.devVPC_available.names[0]
     tags = {
         Name = "dev_terraform_vpc_public_subnet1"
     }
 }
 resource "aws_subnet" "private_subnet1"{
-    cidr_block = "10.0.2.0/24"
+    cidr_block = var.cidr_block_private_subnet1
     vpc_id = aws_vpc.devVPC.id
     map_public_ip_on_launch = false
-    availability_zone = data.aws_availability_zones.devVPC_available.names[1]
+    availability_zone = data.aws_availability_zones.devVPC_available.names[0]
     tags = {
         Name = "dev_terraform_vpc_private_subnet1"
     }
 }
-# Public subnet public CIDR block available in vars.tf and provisionersVPC
+# Public subnet public CIDR block available in variables.tf and vpc
 resource "aws_subnet" "devVPC_public_subnet2"{
-    cidr_block = "10.0.3.0/24"
+    cidr_block = var.cidr_block_public_subnet2
     vpc_id = aws_vpc.devVPC.id
     map_public_ip_on_launch = true
-    availability_zone = data.aws_availability_zones.devVPC_available.names[2]
+    availability_zone = data.aws_availability_zones.devVPC_available.names[1]
     tags = {
         Name = "dev_terraform_vpc_public_subnet2"
     }
 }
 resource "aws_subnet" "private_subnet2"{
-    cidr_block = "10.0.4.0/24"
+    cidr_block = var.cidr_block_private_subnet2
     vpc_id = aws_vpc.devVPC.id
     map_public_ip_on_launch = false
-    availability_zone = data.aws_availability_zones.devVPC_available.names[2]
+    availability_zone = data.aws_availability_zones.devVPC_available.names[1]
     tags = {
         Name = "dev_terraform_vpc_private_subnet2"
     }
