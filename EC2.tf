@@ -4,7 +4,7 @@ data "aws_ami" "amzLinux" {
     }
 
 resource "aws_instance" "Wordpress-instance"{
-    ami = data.aws_ami.amzLinux.id
+    ami = "ami-0ae49954dfb447966"
     instance_type = "t3.micro"
     key_name = "vockey"
     vpc_security_group_ids = [aws_security_group.devVPC_sg_allow_http.id]
