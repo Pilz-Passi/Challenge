@@ -1,8 +1,8 @@
-data "aws_ami" "amzLinux" {
+/*data "aws_ami" "amzLinux" {
         most_recent = true
         owners = ["amazon"]
     }
-
+*/
 resource "aws_instance" "Wordpress-instance"{
     ami = "ami-0ae49954dfb447966"
     instance_type = "t3.micro"
