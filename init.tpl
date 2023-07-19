@@ -59,7 +59,9 @@ sudo mv -f wordpress/* ./
 sudo systemctl restart httpd
 
 #in order to automate the conifguration of worpress, the following lines will have to be added at some point
-# Replace database details in wp-config.php
-#sudo sed -i "s/database_name_here/$DB_NAME/g" /var/www/html/wp-config.php
-#sudo sed -i "s/username_here/$DB_USER/g" /var/www/html/wp-config.php
-#sudo sed -i "s/password_here/$DB_PASSWORD/g" /var/www/html/wp-config.php
+#copy the sample file, to be the new config
+sudo cp wp-config-sample.php wp-config.php
+#Replace database details in wp-config.php, using the credentials I used before for the mysql. see above.
+sudo sed -i "s/database_name_here/mydb/g" /var/www/html/wp-config.php
+sudo sed -i "s/username_here/default_user/g" /var/www/html/wp-config.php
+sudo sed -i "s/password_here/password123/g" /var/www/html/wp-config.php
