@@ -5,6 +5,15 @@ resource "aws_security_group" "devVPC_sg_allow_http"{
         Name = "devVPC_terraform_sg_allow_http"
     }
 }
+# Ingress Security Port 22 (Inbound) SSH, for monitoring reasons
+resource "aws_security_group_rule" "devVPC_http_ingress_access"{
+    from_port = 22
+    protocol = "tcp"
+    security_group_id = aws_security_group.devVPC_sg_allow_http.id
+    to_port= 22
+    type = "ingress"
+    cidr_blocks = [var.cidr_blocks]
+}
 # Ingress Security Port 80 (Inbound)
 resource "aws_security_group_rule" "devVPC_http_ingress_access"{
     from_port = 80
