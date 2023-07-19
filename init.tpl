@@ -3,7 +3,17 @@
 #update any preinstalled packages, just to make sure.
 sudo yum update -y
 #install a bunsh of php stuff that we may or may not use and find suitable. Basically I collected all lines of code I could find from the cohert.
-sudo yum install -y httpd mariadb mariadb-server mysql mysql-server php php-mysqlnd php-mysqli php-json php-fpm
+sudo yum install -y httpd mariadb mariadb-server mysql mysql-server php php-mysqli
+#install EPEL
+sudo amazon-linux-extras install -y epel
+#may it might be possible to install a new php
+#sudo amazon-linux-extras install -y php8.2
+#install repo
+sudo yum install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+#enable php8.0, clean meta and install package
+sudo amazon-linux-extras enable php8.0
+sudo yum clean metadata
+sudo yum install -y php-cli php-pdo php-fpm php-json php-mysqlnd php php-{mbstring,json,xml,mysqlnd}
 #as the following lines gave out an error, I hashed them.
 #sudo wget php-fpm php-mysqli php-json php php-devel
 #sudo mysql_secure_installation
@@ -24,7 +34,7 @@ sudo systemctl start mariadb
 #Enable it, so it starts automatically after a reboot
 sudo systemctl enable mariadb
 #writing permission for the config file in order to configure wordpress
-sudo chmod 744 /var/www/html
+#sudo chmod 744 /var/www/html
 
 #Creating a Database in Mysql
 sudo mysql -e "CREATE DATABASE mydb /*\!40100 DEFAULT CHARACTER SET utf8 */;"
