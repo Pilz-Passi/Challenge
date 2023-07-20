@@ -2,8 +2,9 @@
 
 #update any preinstalled packages, just to make sure.
 sudo yum update -y
-#install a bunsh of php stuff that we may or may not use and find suitable. Basically I collected all lines of code I could find from the cohert.
-sudo yum install -y httpd mariadb mariadb-server mysql mysql-server php php-mysqli
+#install Apache Web Server, Maria Database and php Database
+sudo yum install -y httpd php mariadb105-server
+sudo yum install -y php-mysqli
 #install EPEL
 sudo amazon-linux-extras install -y epel
 #may it might be possible to install a new php
