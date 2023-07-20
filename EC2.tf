@@ -1,14 +1,14 @@
-data "aws_ami" "amzLinux" {
-    most_recent = true
-    owners = ["amazon"]
+# data "aws_ami" "amzLinux" {
+#     most_recent = true
+#     owners = ["amazon"]
         
-    filter {
-    name   = "name"
-    values = ["al2023-ami-2023*"]
-    }
-}
+#     filter {
+#     name   = "name"
+#     values = ["al2023-ami-2023*"]
+#     }
+# }
 resource "aws_instance" "Wordpress-instance"{
-    ami = data.aws_ami.amzLinux.id
+    ami = "ami-0507f77897697c4ba" #data.aws_ami.amzLinux.id
     instance_type = "t3.micro"
     key_name = "vockey"
     vpc_security_group_ids = [aws_security_group.devVPC_sg_allow_http.id]
