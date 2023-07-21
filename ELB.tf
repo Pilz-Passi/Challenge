@@ -37,14 +37,14 @@
 #     scaling_adjustment = -1
 #     cooldown="120"
 # }
-# resource "aws_lb" "test" {
-#   name               = "test-lb-tf"
-#   internal           = false
-#   load_balancer_type = "application"
-#   security_groups    = [aws_security_group.lb_sg.id]
-#   subnets            = [for subnet in aws_subnet.public : subnet.id]
+resource "aws_lb" "test" {
+  name               = "test-lb-tf"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.devVPC_sg_allow_http.id] # devVPC_sg_allow_http
+  subnets            = [aws_subnet.private_subnet1.id, aws_subnet.private_subnet2.id] # private_subnet1 private_subnet2
 
-#   enable_deletion_protection = true
+  #enable_deletion_protection = false
 
 #   access_logs {
 #     bucket  = aws_s3_bucket.lb_logs.id
@@ -52,10 +52,10 @@
 #     enabled = true
 #   }
 
-#   tags = {
-#     Environment = "production"
-#   }
-# }
+  tags = {
+    Environment = "production"
+  }
+}
 # resource "aws_launch_template" "foobar" {
 #   name_prefix   = "foobar"
 #   image_id      = "ami-1a2b3c"
