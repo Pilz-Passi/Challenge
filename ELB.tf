@@ -41,10 +41,10 @@ resource "aws_lb" "test" {
   name               = "test-lb-tf"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.devVPC_sg_allow_http.id] # devVPC_sg_allow_http
-  subnets            = [aws_subnet.private_subnet1.id, aws_subnet.private_subnet2.id] # private_subnet1 private_subnet2
+  security_groups    = [aws_security_group.devVPC_sg_allow_http.id]
+  subnets            = [aws_subnet.private_subnet1.id, aws_subnet.private_subnet2.id]
 
-  #enable_deletion_protection = false
+#  enable_deletion_protection = false
 
 #   access_logs {
 #     bucket  = aws_s3_bucket.lb_logs.id
@@ -56,22 +56,22 @@ resource "aws_lb" "test" {
     Environment = "production"
   }
 }
-# resource "aws_launch_template" "foobar" {
-#   name_prefix   = "foobar"
-#   image_id      = "ami-1a2b3c"
-#   instance_type = "t2.micro"
-# }
-# data "aws_autoscaling_group" "foo" {
-#   name = "foo"
-# }
-# resource "aws_autoscaling_group" "bar" {
-#   availability_zones = ["us-east-1a"]
-#   desired_capacity   = 1
-#   max_size           = 1
-#   min_size           = 1
+resource "aws_launch_template" "get_ready" {
+  name_prefix   = "get_ready"
+  image_id      = "ami-1a2b3c"
+  instance_type = "t2.micro"
+}
+data "aws_autoscaling_group" "scale_group1" {
+  name = "scale_group1"
+}
+resource "aws_autoscaling_group" "scale_group1" {
+  availability_zones = ["us-west-2"]
+  desired_capacity   = 1
+  max_size           = 5
+  min_size           = 2
 
-#   launch_template {
-#     id      = aws_launch_template.foobar.id
-#     version = "$Latest"
-#   }
-# }
+  launch_template {
+    id      = aws_launch_template.get_ready.id
+    version = "$Latest"
+  }
+}
