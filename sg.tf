@@ -41,13 +41,20 @@ resource "aws_security_group_rule" "devVPC_all_traffic_egress_access"{
     type = "egress"
     cidr_blocks = [var.cidr_blocks]
 }
+resource "aws_security_group" "autoscaling-sg"{
+    vpc_id                      = aws_vpc.devVPC.id
+    name                        = "autoscaling-sg"
+    tags = {
+        Name = "autoscaling rule"
+    }
+}
 resource "aws_security_group_rule" "autoscaling-sg-in"{
     from_port                   = 80
     protocol                    = "tcp"
     security_group_id           = aws_security_group.autoscaling-sg.id
     to_port                     = 80
     type                        = "ingress"
-    cidr_blocks                 = [var.cidr_block]
+    cidr_blocks                 = [var.cidr_blocks]
 }
 resource "aws_security_group_rule" "autoscaling-sg-out"{
     from_port                   = 0
@@ -55,10 +62,10 @@ resource "aws_security_group_rule" "autoscaling-sg-out"{
     security_group_id           = aws_security_group.autoscaling-sg.id
     to_port                     = 65535
     type                        = "egress"
-    cidr_blocks                 = [var.cidr_block]
+    cidr_blocks                 = [var.cidr_blocks]
 }
 resource "aws_security_group" "alb-sg"{
-    vpc_id                      = aws_vpc.my_vpc.id
+    vpc_id                      = aws_vpc.devVPC.id
     name                        = "alb-sg"
     tags = {
         Name = "alb-sg"
@@ -70,7 +77,7 @@ resource "aws_security_group_rule" "alb-sg-http-in"{
     security_group_id           = aws_security_group.alb-sg.id
     to_port                     = 80
     type                        = "ingress"
-    cidr_blocks                 = [var.cidr_block]
+    cidr_blocks                 = [var.cidr_blocks]
 }
 resource "aws_security_group_rule" "alb-sg-tcp-out"{
     from_port                   = 0
@@ -78,5 +85,5 @@ resource "aws_security_group_rule" "alb-sg-tcp-out"{
     security_group_id           = aws_security_group.alb-sg.id
     to_port                     = 65535
     type                        = "egress"
-    cidr_blocks                 = [var.cidr_block]
+    cidr_blocks                 = [var.cidr_blocks]
 }

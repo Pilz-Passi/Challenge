@@ -3,7 +3,7 @@ resource "aws_lb" "load-balancer" {
   internal                          = false
   load_balancer_type                = "application"
   security_groups                   = [aws_security_group.alb-sg.id]
-  subnets                           = [aws_subnet.devVPC_public_route1.id, aws_subnet.devVPC_public_route2.id]
+  subnets                           = [aws_subnet.devVPC_public_subnet1.id, aws_subnet.devVPC_public_subnet2.id]
   enable_deletion_protection        = false
     tags = {
         Environment                 = "production"
@@ -48,6 +48,6 @@ resource "aws_lb_target_group" "target-group-wordpress" {
 }
 resource "aws_lb_target_group_attachment" "wordpress" {
   target_group_arn = aws_lb_target_group.target-group-wordpress.arn
-  target_id        = aws_instance.webserver.id
+  target_id        = aws_instance.Wordpress-instance.id
   port             = 80
 }
