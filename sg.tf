@@ -23,15 +23,15 @@ resource "aws_security_group_rule" "devVPC_http_ingress_access"{
     type = "ingress"
     cidr_blocks = [var.cidr_blocks]
 }
-# Ingress Security Port 8080 (Inbound)
-resource "aws_security_group_rule" "devVPC_http8080_ingress_access"{
-    from_port = 8080
-    protocol = "tcp"
-    security_group_id = aws_security_group.devVPC_sg_allow_http.id
-    to_port= 8080
-    type = "ingress"
-    cidr_blocks = [var.cidr_blocks]
-}
+# Ingress Security Port 8080 (Inbound) (for Jenkins)
+# resource "aws_security_group_rule" "devVPC_http8080_ingress_access"{
+#     from_port = 8080
+#     protocol = "tcp"
+#     security_group_id = aws_security_group.devVPC_sg_allow_http.id
+#     to_port= 8080
+#     type = "ingress"
+#     cidr_blocks = [var.cidr_blocks]
+# }
 # Egress Security all traffic (Outbound), so installations are possible
 resource "aws_security_group_rule" "devVPC_all_traffic_egress_access"{
     from_port = 0
@@ -40,4 +40,43 @@ resource "aws_security_group_rule" "devVPC_all_traffic_egress_access"{
     to_port= 0
     type = "egress"
     cidr_blocks = [var.cidr_blocks]
+}
+resource "aws_security_group_rule" "autoscaling-sg-in"{
+    from_port                   = 80
+    protocol                    = "tcp"
+    security_group_id           = aws_security_group.autoscaling-sg.id
+    to_port                     = 80
+    type                        = "ingress"
+    cidr_blocks                 = [var.cidr_block]
+}
+resource "aws_security_group_rule" "autoscaling-sg-out"{
+    from_port                   = 0
+    protocol                    = "all"
+    security_group_id           = aws_security_group.autoscaling-sg.id
+    to_port                     = 65535
+    type                        = "egress"
+    cidr_blocks                 = [var.cidr_block]
+}
+resource "aws_security_group" "alb-sg"{
+    vpc_id                      = aws_vpc.my_vpc.id
+    name                        = "alb-sg"
+    tags = {
+        Name = "alb-sg"
     }
+}
+resource "aws_security_group_rule" "alb-sg-http-in"{
+    from_port                   = 80
+    protocol                    = "tcp"
+    security_group_id           = aws_security_group.alb-sg.id
+    to_port                     = 80
+    type                        = "ingress"
+    cidr_blocks                 = [var.cidr_block]
+}
+resource "aws_security_group_rule" "alb-sg-tcp-out"{
+    from_port                   = 0
+    protocol                    = "all"
+    security_group_id           = aws_security_group.alb-sg.id
+    to_port                     = 65535
+    type                        = "egress"
+    cidr_blocks                 = [var.cidr_block]
+}
