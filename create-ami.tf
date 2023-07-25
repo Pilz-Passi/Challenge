@@ -1,5 +1,8 @@
 # # Has to be delayed for at least 10 Minutes in order to give the original EC2 instance
-# # a change to initialize and install the web server
+# # a change to initialize and install the web server.
+
+# # Will only work in personal AWS, not in Sandbox.
+
 # resource "aws_ami_from_instance" "worpress-image" {
 #   name               = "terraform-wordpress-instance"
 #   depends_on = Wordpress-instance.id
