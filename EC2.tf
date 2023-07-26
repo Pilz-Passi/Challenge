@@ -17,4 +17,9 @@ resource "aws_instance" "Wordpress-instance"{
     tags = {
         Name = "Wordpress-instance"
     }
+
+#Provides a file with metadata
+    provisioner "local-exec"{
+        command = "echo Instance Type=${self.instance_type},Instance ID=${self.id},Public DNS=${self.public_dns},AMI ID=${self.ami} >> allinstancedetails"
+    }
 }
