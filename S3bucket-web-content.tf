@@ -13,5 +13,5 @@ resource "aws_s3_bucket_ownership_controls" "wordpress-content-bucket-for-homepa
 }
 resource "aws_s3_bucket_acl" "wordpress_bucket" {
   bucket = aws_s3_bucket.wordpress-content-bucket-for-homepage645.id
-  acl    = "public"
+  acl    = "private"
 }
