@@ -67,6 +67,6 @@ sudo sed -i "s/database_name_here/mydb/g" /var/www/html/wp-config.php
 sudo sed -i "s/username_here/default_user/g" /var/www/html/wp-config.php
 sudo sed -i "s/password_here/password123/g" /var/www/html/wp-config.php
 
-#install stresstest module for testing purposes later
-wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RESTRT-1-23732/174-lab-JAWS-scale-load-balance/s3/loadtestapp.zip
-unzip loadtestapp.zip -d /var/www/html/
+# #install stresstest module for testing purposes later
+# wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RESTRT-1-23732/174-lab-JAWS-scale-load-balance/s3/loadtestapp.zip
+# unzip loadtestapp.zip -d /var/www/html/

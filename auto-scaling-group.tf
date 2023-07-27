@@ -6,7 +6,7 @@ resource "aws_autoscaling_group" "auto-scaling-grp" {
   vpc_zone_identifier               = [aws_subnet.devVPC_public_subnet1.id, aws_subnet.devVPC_public_subnet2.id]
   target_group_arns                 = [aws_lb_target_group.target-group.arn]
   health_check_type                 = "ELB"
-  health_check_grace_period         = 300
+  health_check_grace_period         = 500
   launch_template {
     id                = aws_launch_template.launch-template.id
     version           = "$Latest"

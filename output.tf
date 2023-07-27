@@ -1,9 +1,9 @@
 output "instance_id" {
     value = aws_instance.Wordpress-instance.id
 }
-output "ami_id" {
-    value = aws_ami_from_instance.Wordpress-instance.id
-}
+# output "ami_id" {
+#     value = aws_ami_from_instance.Wordpress-instance.id
+# }
 output "vpc_id"{
     value = aws_vpc.devVPC.id    
 }
