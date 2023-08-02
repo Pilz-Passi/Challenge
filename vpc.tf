@@ -47,6 +47,18 @@ resource "aws_subnet" "private_subnet2"{
         Name = "dev_terraform_vpc_private_subnet2"
     }
 }
+
+# Subnet Group for RDS
+
+resource "aws_db_subnet_group" "private-sub" {
+  name       = "private_subnets"
+  subnet_ids = [aws_subnet.private_subnet1.id, aws_subnet.private_subnet2.id]
+
+  tags = {
+    Name = "Public DB subnets"
+  }  
+}
+
 # To access EC2 instance inside a Virtual Private Cloud (VPC) we need an Internet Gateway
 # and a routing table Connecting the subnet to the Internet Gateway
 # Creating Internet Gateway

@@ -46,7 +46,7 @@ variable "engine_version" {
   description = "Engine version"
 
   default = {
-    mysql    = "5.7.21"
+    mysql    = "5.7"
   }
 }
 
@@ -56,18 +56,18 @@ variable "instance_class" {
 }
 
 variable "db_name" {
-  default     = "myfirstdb"
+  default     = "mydb"
   description = "db name"
 }
 
 variable "username" {
-  default     = "rahul"
+  default     = "default_user"
   description = "User name"
 }
 
 variable "password" {
   description = "password, provide through your ENV variables"
-  default = "rahul1234"
+  default = "password123"
 }
 
 variable "subnet_1_cidr" {

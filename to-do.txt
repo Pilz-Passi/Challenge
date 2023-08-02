@@ -1,9 +1,1 @@
-create an ami
-set an alarm on cloudwatch
-create a launch-template with
-    ami
-    min/max instances
-create an ELB with 
-    listener
-        rule
-create autoscaling group
+change security_groups ingress and egress to best practice

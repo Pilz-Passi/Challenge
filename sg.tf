@@ -69,6 +69,9 @@ resource "aws_security_group_rule" "autoscaling-sg-out"{
     type                        = "egress"
     cidr_blocks                 = [var.cidr_blocks]
 }
+
+# (Application-)Load-Balancer
+
 resource "aws_security_group" "alb-sg"{
     vpc_id                      = aws_vpc.devVPC.id
     name                        = "alb-sg"
@@ -76,6 +79,7 @@ resource "aws_security_group" "alb-sg"{
         Name = "alb-sg"
     }
 }
+
 resource "aws_security_group_rule" "alb-sg-http-in"{
     from_port                   = 80
     protocol                    = "tcp"
@@ -89,6 +93,33 @@ resource "aws_security_group_rule" "alb-sg-tcp-out"{
     protocol                    = "all"
     security_group_id           = aws_security_group.alb-sg.id
     to_port                     = 65535
+    type                        = "egress"
+    cidr_blocks                 = [var.cidr_blocks]
+}
+
+# RDS
+
+resource "aws_security_group" "rds-sg"{
+    vpc_id                      = aws_vpc.devVPC.id
+    name                        = "rds-sg"
+    tags = {
+        Name = "rds-sg"
+    }
+}
+
+resource "aws_security_group_rule" "rds-sg-in"{
+    from_port                   = 3306
+    protocol                    = "tcp"
+    security_group_id           = aws_security_group.rds-sg.id
+    to_port                     = 3306
+    type                        = "ingress"
+    cidr_blocks                 = [var.cidr_blocks]
+}
+resource "aws_security_group_rule" "rds-sg-out"{
+    from_port                   = 3306
+    protocol                    = "tcp"
+    security_group_id           = aws_security_group.rds-sg.id
+    to_port                     = 3306
     type                        = "egress"
     cidr_blocks                 = [var.cidr_blocks]
 }
