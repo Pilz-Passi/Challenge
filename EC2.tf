@@ -1,3 +1,5 @@
+# Select latest Linux2023 AMI-ID running on 64bit
+
 data "aws_ami" "amzLinux" {
     most_recent = true
     owners = ["amazon"]
@@ -7,9 +9,12 @@ data "aws_ami" "amzLinux" {
     values = ["al2023-ami-2023*x86_64*"]
     }
 }
+
+# EC2 instance for Wordpress
+
 resource "aws_instance" "Wordpress-instance"{
     ami = data.aws_ami.amzLinux.id
-    instance_type = "t3.micro"
+    instance_type = "t2.micro"
     key_name = "vockey"
     vpc_security_group_ids = [aws_security_group.devVPC_sg_allow_http.id]
     subnet_id = aws_subnet.devVPC_public_subnet1.id

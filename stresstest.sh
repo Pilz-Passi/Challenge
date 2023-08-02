@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash
 yum -y update
 yum -y install httpd php
 /usr/bin/systemctl enable httpd

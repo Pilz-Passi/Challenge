@@ -9,6 +9,6 @@ resource "aws_db_instance" "WordpressDatabase" {
   username               = "${var.username}"
   password               = "${var.password}"
   vpc_security_group_ids = ["${aws_security_group.rds-sg.id}"]
-  db_subnet_group_name   = "${aws_db_subnet_group.private-sub.id}"
-  skip_final_snapshot = "true"
+  db_subnet_group_name   = aws_db_subnet_group.private-sub-group.id
+  skip_final_snapshot = true
 }

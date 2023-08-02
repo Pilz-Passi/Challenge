@@ -1,5 +1,6 @@
 # Query all available Availability Zone; we will use specific availability zone using index - The Availability Zones data source
 # provides access to the list of AWS availabililty zones which can be accessed by an AWS account specific to region configured in the provider.
+
 data "aws_availability_zones" "devVPC_available"{}
 resource "aws_vpc" "devVPC"{
     cidr_block = var.cidr_block_dev_vpc
@@ -8,8 +9,13 @@ resource "aws_vpc" "devVPC"{
     tags = {
         Name = "dev_terraform_vpc"
     }
+    provisioner "local-exec"{
+    command = "echo vpc ID=${self.id} >> allinstancedetails"
+  }
 }
+
 # Public subnet public CIDR block available in variables.tf and vpc
+
 resource "aws_subnet" "devVPC_public_subnet1"{
     cidr_block = var.cidr_block_public_subnet1
     vpc_id = aws_vpc.devVPC.id
@@ -19,6 +25,7 @@ resource "aws_subnet" "devVPC_public_subnet1"{
         Name = "dev_terraform_vpc_public_subnet1"
     }
 }
+
 resource "aws_subnet" "private_subnet1"{
     cidr_block = var.cidr_block_private_subnet1
     vpc_id = aws_vpc.devVPC.id
@@ -28,7 +35,9 @@ resource "aws_subnet" "private_subnet1"{
         Name = "dev_terraform_vpc_private_subnet1"
     }
 }
+
 # Public subnet public CIDR block available in variables.tf and vpc
+
 resource "aws_subnet" "devVPC_public_subnet2"{
     cidr_block = var.cidr_block_public_subnet2
     vpc_id = aws_vpc.devVPC.id
@@ -38,6 +47,7 @@ resource "aws_subnet" "devVPC_public_subnet2"{
         Name = "dev_terraform_vpc_public_subnet2"
     }
 }
+
 resource "aws_subnet" "private_subnet2"{
     cidr_block = var.cidr_block_private_subnet2
     vpc_id = aws_vpc.devVPC.id
@@ -50,12 +60,12 @@ resource "aws_subnet" "private_subnet2"{
 
 # Subnet Group for RDS
 
-resource "aws_db_subnet_group" "private-sub" {
-  name       = "private_subnets"
+resource "aws_db_subnet_group" "private-sub-group" {
+  name       = "private_sub-group"
   subnet_ids = [aws_subnet.private_subnet1.id, aws_subnet.private_subnet2.id]
 
   tags = {
-    Name = "Public DB subnets"
+    Name = "Private DB subnets"
   }  
 }
 
@@ -69,7 +79,9 @@ resource "aws_internet_gateway" "devVPC_IGW"{
         Name = "dev_terraform_vpc_igw"
     }
 }
+
 # Provides a resource to create a VPC routing table
+
 resource "aws_route_table" "devVPC_public_route1"{
     vpc_id = aws_vpc.devVPC.id
     route{
@@ -80,13 +92,17 @@ resource "aws_route_table" "devVPC_public_route1"{
         Name = "dev_terraform_vpc_public_route1"
     }
 }
+
 # Provides a resource to create an association between a Public Route Table and a Public Subnet
+
 resource "aws_route_table_association" "public_subnet_association1" {
     route_table_id = aws_route_table.devVPC_public_route1.id
     subnet_id = aws_subnet.devVPC_public_subnet1.id
     depends_on = [aws_route_table.devVPC_public_route1, aws_subnet.devVPC_public_subnet1]
 }
+
 # Provides a resource to create a VPC routing table
+
 resource "aws_route_table" "devVPC_public_route2"{
     vpc_id = aws_vpc.devVPC.id
     route{
@@ -97,13 +113,16 @@ resource "aws_route_table" "devVPC_public_route2"{
         Name = "dev_terraform_vpc_public_route2"
     }
 }
+
 # Provides a resource to create an association between a Public Route Table and a Public Subnet
+
 resource "aws_route_table_association" "public_subnet_association2" {
     route_table_id = aws_route_table.devVPC_public_route2.id
     subnet_id = aws_subnet.devVPC_public_subnet2.id
     depends_on = [aws_route_table.devVPC_public_route2, aws_subnet.devVPC_public_subnet2]
 }
-# # Adding NAT Gatway
+
+# # Adding NAT Gatway (deactivated in the Sanbox environment)
 # # Create Elastic IP. The advantage of associating the Elastic IP address with the network interface instead of directly with the instance is that you can move all the attributes of the network interface from one instance to another in a single step.
 
 # resource "aws_eip" "nf_ip" {
