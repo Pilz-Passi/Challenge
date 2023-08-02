@@ -1,1 +1,3 @@
 change security_groups ingress and egress to best practice
+get metadata of rds arn
+get metadata of Load Balancer DNS

@@ -50,7 +50,7 @@ resource "aws_security_group" "autoscaling-sg"{
 
     # Autoscaling rule ingress port 80 (http)
 
-    resource "aws_security_group_rule" "autoscaling-sg-in"{
+    resource "aws_security_group_rule" "autoscaling-sg-in-http"{
         from_port                   = 80
         protocol                    = "tcp"
         security_group_id           = aws_security_group.autoscaling-sg.id
@@ -61,7 +61,7 @@ resource "aws_security_group" "autoscaling-sg"{
 
     # Autoscaling rule ingress port 22 (SSH)
 
-    resource "aws_security_group_rule" "autoscaling-sg-in"{
+    resource "aws_security_group_rule" "autoscaling-sg-in-ssh"{
         from_port                   = 22
         protocol                    = "tcp"
         security_group_id           = aws_security_group.autoscaling-sg.id
@@ -72,7 +72,7 @@ resource "aws_security_group" "autoscaling-sg"{
 
     # Autoscaling rule ingress port 3306 (RDS)
 
-    resource "aws_security_group_rule" "autoscaling-sg-in"{
+    resource "aws_security_group_rule" "autoscaling-sg-in-sql"{
         from_port                   = 3306
         protocol                    = "tcp"
         security_group_id           = aws_security_group.autoscaling-sg.id
@@ -126,7 +126,7 @@ resource "aws_security_group" "alb-sg"{
 
     # Load Balancer rule ingress 80 (http)
 
-    resource "aws_security_group_rule" "alb-sg-http-in"{
+    resource "aws_security_group_rule" "alb-sg-http-in-http"{
         from_port                   = 80
         protocol                    = "tcp"
         security_group_id           = aws_security_group.alb-sg.id
@@ -137,7 +137,7 @@ resource "aws_security_group" "alb-sg"{
 
     # Load Balancer rule ingress 443 (hhtps)
 
-    resource "aws_security_group_rule" "alb-sg-http-in"{
+    resource "aws_security_group_rule" "alb-sg-http-in-https"{
         from_port                   = 443
         protocol                    = "tcp"
         security_group_id           = aws_security_group.alb-sg.id
