@@ -94,10 +94,6 @@ variable "vpc_id" {
   description = "Your VPC ID"
   default = "vpc-be1010d7"
 }
-variable "cidr_blocks" {
-  default     = "0.0.0.0/0"
-  description = "CIDR for sg"
-}
 
 variable "sg_name" {
   default     = "my-rds-sg"

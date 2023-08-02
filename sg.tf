@@ -1,3 +1,5 @@
+# Wordpress
+
 resource "aws_security_group" "devVPC_sg_allow_http"{
     vpc_id = aws_vpc.devVPC.id
     name = "devVPC_terraform_vpc_allow_http"
@@ -41,6 +43,9 @@ resource "aws_security_group_rule" "devVPC_all_traffic_egress_access"{
     type = "egress"
     cidr_blocks = [var.cidr_blocks]
 }
+
+#Autoscaling
+
 resource "aws_security_group" "autoscaling-sg"{
     vpc_id                      = aws_vpc.devVPC.id
     name                        = "autoscaling-sg"
