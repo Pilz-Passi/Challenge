@@ -9,7 +9,7 @@ data "aws_ami" "amzLinux" {
 }
 resource "aws_instance" "Wordpress-instance"{
     ami = data.aws_ami.amzLinux.id
-    instance_type = "t2.micro"
+    instance_type = "t3.micro"
     key_name = "vockey"
     vpc_security_group_ids = [aws_security_group.devVPC_sg_allow_http.id]
     subnet_id = aws_subnet.devVPC_public_subnet1.id
