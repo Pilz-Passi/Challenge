@@ -6,3 +6,5 @@ Instance Type=t3.micro,Instance ID=i-084c391b970af5e7b,Public DNS=ec2-34-217-73-
 Instance Type=t3.micro,Instance ID=i-094e78e833c0b79bb,Public DNS=ec2-18-237-107-198.us-west-2.compute.amazonaws.com,AMI ID=ami-00970f57473724c10 
 vpc ID=vpc-0c0806f813727fde6 
 Instance Type=t2.micro,Instance ID=i-0c002d7bc11d6aa09,Public DNS=ec2-54-69-184-23.us-west-2.compute.amazonaws.com,AMI ID=ami-00970f57473724c10 
+vpc ID=vpc-0d6664888e504a2f6 
+Instance Type=t2.micro,Instance ID=i-0676e05c8a1c88128,Public DNS=ec2-35-163-68-78.us-west-2.compute.amazonaws.com,AMI ID=ami-00970f57473724c10 
