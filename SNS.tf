@@ -1,3 +1,5 @@
+# Service Notification System sends a mail, whenever an EC2 instance is either launched, terminated or issuing any errors
+
 resource "aws_autoscaling_notification" "autoscaling_notifications" {
   group_names = [
     aws_autoscaling_group.auto-scaling-grp.name,

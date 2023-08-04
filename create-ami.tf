@@ -1,8 +1,8 @@
-# # Thea idea was to create a an AMI of the EC2-wordpress-instance
+# # The idea was to create a an AMI of the EC2-wordpress-instance
 # # and to use it in the launch template. However, this was not possible in the Sanbox environment.
 
 # # Has to be delayed for at least 10 Minutes in order to give the original EC2 instance
-# # a change to initialize and install the web server.
+# # a chance to initialize, install the web server and Wordpress.
 
 # # Will only work in personal AWS, not in Sandbox.
 

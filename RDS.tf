@@ -1,3 +1,6 @@
+# Creates a MySQL database for Wordpress in the private subnet.
+# Only allowing ingress from port 3306.
+
 resource "aws_db_instance" "WordpressDatabase" {
   depends_on             = [aws_security_group.devVPC_sg_allow_http]
   identifier             = "${var.identifier}"

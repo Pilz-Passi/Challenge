@@ -1,3 +1,8 @@
+# Autoscaling Group will start with 2 instances in the public subnet. 
+# Right now the EC2 instances come preinstalled with a stress test,
+# in order to manually trigger the scaling out.
+# Ultimatly it shall scale out the Wordpress-instance.
+
 resource "aws_autoscaling_group" "auto-scaling-grp" {
   name                              = "my-autoscaling-group"
   max_size                          = 4

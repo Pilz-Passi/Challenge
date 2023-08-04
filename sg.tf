@@ -167,7 +167,7 @@ resource "aws_security_group" "rds-sg"{
         cidr_blocks                 = [var.cidr_blocks]
     }
 
-    # egress
+    # RDS MySQL rule egress 3306 (MySQL), so connection to the EC2 is possible
 
     resource "aws_security_group_rule" "rds-sg-out"{
         from_port                   = 3306

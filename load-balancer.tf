@@ -12,7 +12,7 @@ resource "aws_lb" "load-balancer" {
   }
 }
 
-# pointing to port 80 (http) in the VPC
+# Target group pointing to port 80 (http) in the VPC
 
 resource "aws_lb_target_group" "target-group" {
   name                              = "CPUtest-tg"

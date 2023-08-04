@@ -10,10 +10,29 @@ data "aws_ami" "amzLinux" {
     }
 }
 
-# # creates an IAM role
+# # creates an IAM role (not possible in Sandbox environment)
 
 # resource "aws_iam_role" "LabRole" {
 #   name = "LabRole"
+#     assume_role_policy = jsonencode({
+#         Version = "2012-10-17"
+#         Statement = [
+#           {
+#             Effect = "Allow"
+#             Principal = {
+#             Service = "ec2.amazonaws.com"
+#             }
+#             Action = "sts:AssumeRole"
+#          }
+#      ]
+#     })
+# }
+
+# Attach the IAM policy to the IAM role
+# resource "aws_iam_policy_attachment" "role_policy_attachment" {
+#   name = "Policy Attachement"
+#   policy_arn = aws_iam_policy.iam_policy.arn
+#   roles       = [aws_iam_role.LabRole.name]
 # }
 
 # # creates an IAM instance profile that will lateron allow us to assign the IAM LabRole to the EC2 instance

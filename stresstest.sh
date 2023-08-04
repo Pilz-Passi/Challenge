@@ -1,3 +1,12 @@
+####################
+#
+# author: Amazon
+#
+# purpose: installs Apache Web Server and a stresstest tool 
+# to set CPU load to 100% to manually trigger/test the Autoscaling group.
+#
+####################
+
 #!/bin/bash
 yum -y update
 yum -y install httpd php

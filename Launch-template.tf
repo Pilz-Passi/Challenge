@@ -1,3 +1,7 @@
+# Creates a launch template, which is being used by the Autoscaling group.
+# For now it will install the stresstest tool, to be able to manually trigger the scale out.
+# Later it will use the user-data, which installs wordpress.
+
 resource "aws_launch_template" "launch-template" {
     name                              = "webserver-launch-template"
     image_id                          = data.aws_ami.amzLinux.id

@@ -1,3 +1,5 @@
+# Providing many Variables to different modules. Mostly self explanatory, as descriptions are provided.
+
 variable "AWS_REGION"{
     default="us-west-2"
     description="AWS Region"
@@ -70,6 +72,7 @@ variable "password" {
   default = "password123"
 }
 
+# Provided locally at the moment, therefor #'ed.
 # variable "db-host" {
 #   description = "pointer to the RDS database"
 #   value = aws_db_instance.WordpressDatabase.adress
@@ -77,5 +80,5 @@ variable "password" {
 
 variable "sg_name" {
   default     = "my-rds-sg"
-  description = "Tag Name for sg"
+  description = "sg for RDS"
 }

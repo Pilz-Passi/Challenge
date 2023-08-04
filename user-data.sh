@@ -1,3 +1,15 @@
+###############################################
+#
+# author: Pascal Spielvogel
+#
+# purpose of this script:
+# - To install all neccecary tools for setting up a web server.
+# - Fetch content for Wordpress from S3 bucket
+# - Provide MySQL client
+# - Connect Wordpress with RDS database
+#
+################################################
+
 #!/bin/bash
 
 #update any preinstalled packages, just to make sure.
@@ -26,7 +38,7 @@ sudo systemctl enable httpd
 sudo usermod -a -G apache ec2-user
 #transmit ownership of this folder to the ec2-user
 sudo chown -R ec2-user:apache /var/www
-#I don't know what the fuck this command does. May set writing permissions to that directory. (same as below)
+#searches for all files in the /var/www directory and its subdirectories, and then it sets the permissions so the owner can read and write, while the group and others can only read the file
 find /var/www -type f -exec sudo chmod 0664 {} \;
 #this command didn't work on manual approach, so I hashed it for now.
 #sudo chkconfig httpd on
