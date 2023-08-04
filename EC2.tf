@@ -18,11 +18,9 @@ resource "aws_instance" "Wordpress-instance"{
     key_name = "vockey"
     vpc_security_group_ids = [aws_security_group.devVPC_sg_allow_http.id]
     subnet_id = aws_subnet.devVPC_public_subnet1.id
-    user_data = "${file("init.tpl")}"
     # assigning the lab role for S3 bucket access
-    iam_instance_profile {
-        name =  "LabInstanceProfile"
-    }    
+    iam_instance_profile = "LabRole"
+    user_data = "${file("init.tpl")}"
     tags = {
         Name = "Wordpress-instance"
     }
