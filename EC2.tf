@@ -29,6 +29,7 @@ data "aws_ami" "amzLinux" {
 # }
 
 # Attach the IAM policy to the IAM role
+
 # resource "aws_iam_policy_attachment" "role_policy_attachment" {
 #   name = "Policy Attachement"
 #   policy_arn = aws_iam_policy.iam_policy.arn
@@ -42,6 +43,7 @@ data "aws_ami" "amzLinux" {
 #   role = aws_iam_role.LabInstanceProfile.name
 # }
 
+# Use the existing LabRole from the sandbox environment
 data "aws_iam_instance_profile" "LabInstanceProfile" {
   name = "LabInstanceProfile"
 }
