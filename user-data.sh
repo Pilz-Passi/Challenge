@@ -70,7 +70,7 @@ aws s3 sync s3://deham6-wordpress/ .
 sudo sed -i "s/database_name_here/${DB}/g" /var/www/html/wp-config.php
 sudo sed -i "s/username_here/${User}/g" /var/www/html/wp-config.php
 sudo sed -i "s/password_here/${PW}/g" /var/www/html/wp-config.php
-sudo sed -i "s/localhost/${db-host}/" wp-config.php
+sudo sed -i "s/localhost/${host}/" wp-config.php
 
 #restart Apache Web Server Service
 sudo systemctl restart httpd

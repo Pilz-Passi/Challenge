@@ -31,7 +31,7 @@ locals {
         DB      ="mydb"
         User    ="default_user"
         PW      ="password123"
-        db-host = aws_db_instance.WordpressDatabase.address
+        host = aws_db_instance.WordpressDatabase.address
 }
 
 
@@ -50,7 +50,7 @@ resource "aws_instance" "Wordpress-instance"{
         DB      = local.DB
         User    = local.User
         PW      = local.PW
-        db-host    = local.db-host
+        host    = local.host
     }))
     tags = {
         Name = "Wordpress-instance"

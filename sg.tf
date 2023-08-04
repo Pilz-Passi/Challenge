@@ -169,7 +169,7 @@ resource "aws_security_group" "rds-sg"{
 
     # egress
 
-    resource "aws_security_group_rule" "rds-sg-out-to-Ec2"{
+    resource "aws_security_group_rule" "rds-sg-out"{
         from_port                   = 3306
         protocol                    = "tcp"
         security_group_id           = aws_security_group.rds-sg.id
