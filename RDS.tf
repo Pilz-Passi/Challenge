@@ -1,5 +1,5 @@
 resource "aws_db_instance" "WordpressDatabase" {
-  depends_on             = [aws_security_group.devVPC_sg_allow_http, aws_instance.Wordpress-instance]
+  depends_on             = [aws_security_group.devVPC_sg_allow_http]
   identifier             = "${var.identifier}"
   allocated_storage      = "${var.storage}"
   engine                 = "${var.engine}"

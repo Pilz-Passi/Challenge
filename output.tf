@@ -22,7 +22,7 @@ output "security_group"{
 output "ec2_public_ip"{
     value = aws_instance.Wordpress-instance.public_ip   
 }
-output "name" {
+output "ALB-public-DNS" {
   value = aws_lb.load-balancer.dns_name
 }
 /*output "packer_ami"{

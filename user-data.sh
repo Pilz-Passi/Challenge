@@ -38,10 +38,10 @@ sudo systemctl enable mariadb
 #sudo chmod 744 /var/www/html
 
 # Copy Wordpress homepage from S3 bucket
-
+cd /var/www/html
 aws s3 sync s3://deham6-wordpress/ .
 
-# # Option: Installing Wordpress from scratch
+# # Optional: Installing Wordpress from scratch
 
 # #Creating a Database in Mysql
 # sudo mysql -e "CREATE DATABASE mydb /*\!40100 DEFAULT CHARACTER SET utf8 */;"
@@ -63,17 +63,17 @@ aws s3 sync s3://deham6-wordpress/ .
 # #move the extracted files to the root directory
 # sudo mv -f wordpress/* ./
 
-#restart Apache Web Server Service
-sudo systemctl restart httpd
-
 #in order to automate the conifguration of worpress, the following lines will have to be added at some point
 #copy the sample file, to be the new config
-sudo cp wp-config-sample.php wp-config.php
+#sudo cp wp-config-sample.php wp-config.php
 #Replace database details in wp-config.php, using the credentials I used before for the mysql. see above.
-sudo sed -i "s/database_name_here/mydb/g" /var/www/html/wp-config.php
-sudo sed -i "s/username_here/default_user/g" /var/www/html/wp-config.php
-sudo sed -i "s/password_here/password123/g" /var/www/html/wp-config.php
+sudo sed -i "s/database_name_here/${DB}/g" /var/www/html/wp-config.php
+sudo sed -i "s/username_here/${User}/g" /var/www/html/wp-config.php
+sudo sed -i "s/password_here/${PW}/g" /var/www/html/wp-config.php
 sudo sed -i "s/localhost/${db-host}/" wp-config.php
+
+#restart Apache Web Server Service
+sudo systemctl restart httpd
 
 # #install stresstest module for testing purposes later
 # wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RESTRT-1-23732/174-lab-JAWS-scale-load-balance/s3/loadtestapp.zip

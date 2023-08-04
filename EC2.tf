@@ -10,17 +10,48 @@ data "aws_ami" "amzLinux" {
     }
 }
 
+# # creates an IAM role
+
+# resource "aws_iam_role" "LabRole" {
+#   name = "LabRole"
+# }
+
+# # creates an IAM instance profile that will lateron allow us to assign the IAM LabRole to the EC2 instance
+
+# resource "aws_iam_instance_profile" "LabInstanceProfile" {
+#   name = "LabInstanceProfile"
+#   role = aws_iam_role.LabInstanceProfile.name
+# }
+
+data "aws_iam_instance_profile" "LabInstanceProfile" {
+  name = "LabInstanceProfile"
+}
+
+locals {
+        DB      ="mydb"
+        User    ="default_user"
+        PW      ="password123"
+        db-host = aws_db_instance.WordpressDatabase.address
+}
+
+
 # EC2 instance for Wordpress
 
 resource "aws_instance" "Wordpress-instance"{
+    depends_on = [aws_db_instance.WordpressDatabase]
     ami = data.aws_ami.amzLinux.id
     instance_type = "t2.micro"
     key_name = "vockey"
     vpc_security_group_ids = [aws_security_group.devVPC_sg_allow_http.id]
     subnet_id = aws_subnet.devVPC_public_subnet1.id
     # assigning the lab role for S3 bucket access
-    #iam_instance_profile = "LabInstanceProfile"
-    user_data = "${file("user-data.sh")}"
+    iam_instance_profile = data.aws_iam_instance_profile.LabInstanceProfile.name
+    user_data = base64encode(templatefile("user-data.sh",{
+        DB      = local.DB
+        User    = local.User
+        PW      = local.PW
+        db-host    = local.db-host
+    }))
     tags = {
         Name = "Wordpress-instance"
     }

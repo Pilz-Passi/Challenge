@@ -10,3 +10,5 @@ vpc ID=vpc-0d6664888e504a2f6
 Instance Type=t2.micro,Instance ID=i-0676e05c8a1c88128,Public DNS=ec2-35-163-68-78.us-west-2.compute.amazonaws.com,AMI ID=ami-00970f57473724c10 
 vpc ID=vpc-0446395764b984db1 
 Instance Type=t2.micro,Instance ID=i-0182318e8c535de18,Public DNS=ec2-54-187-154-134.us-west-2.compute.amazonaws.com,AMI ID=ami-00970f57473724c10 
+Instance Type=t2.micro,Instance ID=i-0e0e6450ebc4c1161,Public DNS=ec2-34-209-42-175.us-west-2.compute.amazonaws.com,AMI ID=ami-00970f57473724c10 
+Instance Type=t2.micro,Instance ID=i-014e7ac3fdaa1341a,Public DNS=ec2-35-88-161-55.us-west-2.compute.amazonaws.com,AMI ID=ami-00970f57473724c10 

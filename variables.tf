@@ -70,10 +70,10 @@ variable "password" {
   default = "password123"
 }
 
-variable "db-host" {
-  description = "pointer to the RDS database"
-  default = "aws_db_instance.WordpressDatabase.adress"
-}
+# variable "db-host" {
+#   description = "pointer to the RDS database"
+#   value = aws_db_instance.WordpressDatabase.adress
+# }
 
 variable "sg_name" {
   default     = "my-rds-sg"
