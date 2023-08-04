@@ -2,4 +2,4 @@ change security_groups ingress and egress to best practice
 change security_groups for RDS and EC2 communication
 get metadata of rds arn -> allinstancedetails
 get metadata of Load Balancer DNS -> allinstancedetails
- 
+make sure rds endpoint ist written to wp-config.hp

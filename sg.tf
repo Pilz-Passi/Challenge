@@ -92,17 +92,6 @@ resource "aws_security_group" "autoscaling-sg"{
         source_security_group_id    = aws_security_group.autoscaling-sg.id
     }
 
-    # Autoscaling rule egress 3306 (MySQL)
-
-    resource "aws_security_group_rule" "mysql-sg-autoscaling-out"{
-        from_port                   = 3306
-        protocol                    = "tcp"
-        security_group_id           = aws_security_group.rds-sg.id
-        to_port                     = 3306
-        type                        = "egress"
-        source_security_group_id    = aws_security_group.autoscaling-sg.id
-    }
-
     # Autoscaling rule egress all (Outbound)
 
     resource "aws_security_group_rule" "autoscaling-sg-out"{
@@ -178,11 +167,13 @@ resource "aws_security_group" "rds-sg"{
         cidr_blocks                 = [var.cidr_blocks]
     }
 
-    # resource "aws_security_group_rule" "rds-sg-out"{
-    #     from_port                   = 3306
-    #     protocol                    = "tcp"
-    #     security_group_id           = aws_security_group.rds-sg.id
-    #     to_port                     = 3306
-    #     type                        = "egress"
-    #     cidr_blocks                 = [var.cidr_blocks]
-    # }
+    # egress
+
+    resource "aws_security_group_rule" "rds-sg-out-to-Ec2"{
+        from_port                   = 3306
+        protocol                    = "tcp"
+        security_group_id           = aws_security_group.rds-sg.id
+        to_port                     = 3306
+        type                        = "egress"
+        cidr_blocks                 = [var.cidr_blocks]
+    }
