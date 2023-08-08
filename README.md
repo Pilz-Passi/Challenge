@@ -1,4 +1,6 @@
 # Challenge
+# This is a (constantly) work-in-progress!
+
 Setting up an EC2 instance with WP, using terraform
 
 VPC
